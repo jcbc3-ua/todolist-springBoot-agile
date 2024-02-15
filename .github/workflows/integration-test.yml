@@ -1,0 +1,31 @@
+name: Integration tests
+
+on: push
+
+jobs:
+  container-job:
+    runs-on: ubuntu-latest
+    container: openjdk:8-jdk-alpine
+    services:
+      # Etiqueta usada para acceder al contenedor del servicio
+      postgres:
+        # Imagen Docker Hub
+        image: postgres:13
+        # Variables para arrancar PostgreSQL
+        env:
+          POSTGRES_USER: mads
+          POSTGRES_PASSWORD: mads
+          POSTGRES_DB: mads_test
+        # Definimos chequeos para esperar hasta que postgres ya ha comenzado
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Launch tests with Maven
+        run:  ./mvnw test -D spring.profiles.active=postgres
+        env:
+          POSTGRES_HOST: postgres

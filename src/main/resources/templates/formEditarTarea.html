@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head (titulo='Login')"></head>
+
+<body>
+<div th:replace="fragments::navbar"/>
+<div class="container-fluid">
+
+    <h2 th:text="'Modificación de la tarea ' + ${tarea.getId()}"></h2>
+
+    <form method="post" th:action="@{/tareas/{id}/editar(id=${tarea.id})}" th:object="${tareaData}">
+        <div class="col-6">
+        <div class="form-group">
+            <label for="titulo">Título de la tarea:</label>
+            <input class="form-control" id="titulo" name="titulo" required th:field="*{titulo}" type="text"/>
+        </div>
+        <button class="btn btn-primary" type="submit">Modificar tarea</button>
+        <a class="btn btn-link" th:href="@{/usuarios/{id}/tareas(id=${tarea.usuarioId})}">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+<div th:replace="fragments::javascript"/>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head (titulo)">
+    <meta charset="UTF-8"/>
+    <title th:text="${titulo}"></title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" th:fragment="navbar">
+    <a class="navbar-brand" href="/about">ToDoList</a>
+    <div class="nav-item dropdown" th:if="${barramenu == 'menulogeado'}">
+        <a class="navbar-brand" th:href="@{'/usuarios/' + ${usuario.id} + '/tareas'}">Tareas</a>
+    </div>
+    <div class="nav-item dropdown" th:if="${barramenu == 'menunologeado'}">
+        <a class="navbar-brand" href="/login">Tareas</a>
+    </div>
+    <div class="nav-item dropdown" th:if="${barramenu == 'menulogeado'}">
+        <a class="navbar-brand" href="/equipos">Equipos</a>
+    </div>
+
+    <div class="navbar-nav ml-auto">
+        <div class="nav-item dropdown" th:if="${barramenu == 'menulogeado'}">
+            <a class="nav-link dropdown-toggle" href="#" id="usuarioDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="nav-item nav-link active" th:align="right" th:text="${usuario.nombre}"></span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="usuarioDropdown">
+                <a class="dropdown-item" href="/cuenta">Cuenta</a>
+                <a class="dropdown-item" href="/logout">Cerrar Sesión <br><span th:text="${usuario.nombre}"></span></a>
+            </div>
+        </div>
+        <div class="nav-item dropdown" th:if="${barramenu == 'menunologeado'}">
+            <a class="nav-link" href="/login">Login <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/registro">Ir a registro <span class="sr-only">(current)</span></a>
+        </div>
+    </div>
+    </div>
+</nav>
+
+<div th:fragment="javascript">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</div>
+
+</html>

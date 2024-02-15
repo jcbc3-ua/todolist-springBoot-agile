@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head (titulo='Usuarios')"></head>
+<body>
+<div th:replace="fragments::navbar"/>
+
+
+<div class="container-fluid">
+    <div class="row mt-3">
+        <div class="col">
+            <h2>Listado de Usuarios Registrados</h2>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Identificador</th>
+                    <th>Correo Electrónico</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="usuario : ${usuarios}">
+                    <td th:text="${usuario.id}"></td>
+                    <td th:text="${usuario.email}"></td>
+                    <td><a class="btn btn-primary btn-xs" th:href="@{/registrados/{id}(id=${usuario.id})}"/>Descripción</a>
+
+                            <a class="btn btn-danger btn-xs" th:href="@{/bloquear/{id}(id=${usuario.id})}"
+                                    th:if="${usuario.bloqueado == false || usuario.bloqueado == null}" >Bloquear</a>
+
+                            <a class="btn btn-success text-white" th:href="@{/desbloquear/{id}(id=${usuario.id})}"
+                                    th:if="${usuario.bloqueado == true }">Desbloquear</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+</div>
+<div th:replace="fragments::javascript"/>
+
+</body>
+</html>

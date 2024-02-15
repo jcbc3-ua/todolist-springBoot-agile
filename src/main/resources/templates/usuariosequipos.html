@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments :: head (titulo='Usuarios de Equipo')"></head>
+<body>
+<div th:replace="fragments::navbar"/>
+
+<div class="container-fluid">
+    <div class="row mt-3">
+        <div class="col">
+
+            <h2 th:text="'Usuarios del Equipo: ' + ${equipo.nombre}"></h2>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${usuarios}">
+                    <td th:text="${user.nombre}" ></td>
+                    <td th:text="${user.email}"></td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments::javascript"/>
+</body>
+</html>

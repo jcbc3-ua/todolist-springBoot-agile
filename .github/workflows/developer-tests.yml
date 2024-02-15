@@ -1,0 +1,17 @@
+name: Developer Tests
+
+on: push
+
+jobs:
+  # El nombre del job es launch-test
+  launch-tests:
+    runs-on: ubuntu-latest
+    # Todos los pasos se ejecutan en el contenedor openjda:8-jdk-alpine
+    container: openjdk:8-jdk-alpine
+
+    steps:
+      # Hacemos un checkout del código del repositorio
+      - uses: actions/checkout@v2
+      # Y lanzamos los tests
+      - name: Launch tests with Maven
+        run:  ./mvnw test

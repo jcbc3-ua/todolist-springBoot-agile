@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head (titulo='ToDoList')"></head>
+
+<body>
+<!-- empieza el navbar -->
+
+
+<div th:replace="fragments::navbar"/>
+
+<!-- acaba el navbar -->
+<div class="container-fluid">
+    <div class="container-fluid">
+        <h1>ToDoList</h1>
+        <ul>
+            <li>Desarrollada por Juan Carlos Barbero </li>
+            <li>Versión 1.1.0</li>
+            <li>Fecha de release: 17/10/2023</li>
+        </ul>
+    </div>
+
+</div>
+
+<div th:replace="fragments::javascript"/>
+
+</body>
+</html>
